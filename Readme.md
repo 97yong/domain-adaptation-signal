@@ -74,10 +74,9 @@ data/
 
 <table>
   <tr><th>Argument</th><th>Description</th><th>Default</th></tr>
-  <tr><td><code>--epochs</code></td><td>Number of training epochs</td><td>20</td></tr>
+  <tr><td><code>--epochs</code></td><td>Number of training epochs</td><td>10</td></tr>
   <tr><td><code>--lr</code></td><td>Learning rate</td><td>1e-4</td></tr>
   <tr><td><code>--batch_size</code></td><td>Mini-batch size</td><td>64</td></tr>
-  <tr><td><code>--train_size</code></td><td>Train/val split (if applicable)</td><td>0.8</td></tr>
 </table>
 
 <hr/>
