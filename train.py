@@ -66,8 +66,13 @@ def train_model(opt, source_dl, target_dl):
             total = total + (len(batch_1[0]) + len(batch_2[0]))
             d_acc = 100 * float(d_correct) / total
                         
-            pbar.set_postfix({f'Epoch {epoch + 1}': f'Task Classification Loss: {loss_y.item():.4f} | Domain Classification Loss : {loss_d.item():.4f} | Domain Accuracy: {d_acc:.2f}'})
-            
+            pbar.set_postfix({
+                'epoch': epoch + 1,
+                'task_loss': f"{loss_y.item():.4f}",
+                'domain_loss': f"{loss_d.item():.4f}",
+                'domain_acc': f"{d_acc:.2f}%"
+            })
+
         scheduler.step()
 
     return extractor, predictor
