@@ -1,6 +1,7 @@
 import torch
 from torch.utils.data import Dataset, DataLoader
 from sklearn.model_selection import train_test_split
+import numpy as np
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -15,14 +16,19 @@ class MyDataset(Dataset):
     def __getitem__(self, idx):
         return self.x[idx].to(device), self.y[idx].to(device)
 
-def get_dataloaders(X, Y, opt):
-    x_train, x_valid, y_train, y_valid = train_test_split(
-        X, Y, train_size=opt.train_size, stratify=Y, random_state=42)
-    x_valid, x_test, y_valid, y_test = train_test_split(
-        x_valid, y_valid, train_size=0.5, stratify=y_valid, random_state=42)
+def get_dataloaders(opt, source_X_path, target_X_path, target_X_test_path, source_Y_path, target_Y_path, target_Y_test_path):
 
-    train_dl = DataLoader(MyDataset(x_train, y_train), batch_size=opt.batch_size, shuffle=True)
-    valid_dl = DataLoader(MyDataset(x_valid, y_valid), batch_size=opt.batch_size, shuffle=False)
-    test_dl = DataLoader(MyDataset(x_test, y_test), batch_size=opt.batch_size, shuffle=False)
+    source_X = np.load(source_X_path)
+    source_Y = np.load(source_Y_path)
+
+    target_X = np.load(target_X_path)
+    target_Y = np.load(target_Y_path)
+
+    target_X_test = np.load(target_X_test_path)
+    target_Y_test = np.load(target_Y_test_path)
+
+    source_dl = DataLoader(MyDataset(source_X, source_Y), batch_size=opt.batch_size, shuffle=True)
+    target_dl = DataLoader(MyDataset(target_X, target_Y), batch_size=opt.batch_size, shuffle=True)
+    target_test_dl = DataLoader(MyDataset(target_X_test, target_Y_test), batch_size=opt.batch_size, shuffle=False)
     
-    return train_dl, valid_dl, test_dl
+    return source_dl, target_dl, target_test_dl

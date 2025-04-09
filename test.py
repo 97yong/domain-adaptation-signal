@@ -1,15 +1,17 @@
 import torch
 import numpy as np
 
-def evaluate(test_dl, model):
+def evaluate(test_dl, extractor, predictor):
     
-    model.eval()
+    extractor.eval()
+    predictor.eval()
 
     preds, labels = [], []
 
     with torch.no_grad():
         for x, y in test_dl:
-            y_pred = model(x)
+            feature = extractor(x)
+            y_pred = predictor(feature)
             preds.append(torch.argmax(y_pred, 1).cpu())
             labels.append(y.cpu())
 

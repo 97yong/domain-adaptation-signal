@@ -8,5 +8,6 @@ def get_args():
     parser.add_argument('--early_stop', type=int, default=20)
     parser.add_argument('--train_size', type=float, default=0.8)
     parser.add_argument('--batch_size', type=int, default=64)
+    parser.add_argument('--alpha', type=float, default=1)
     
     return parser.parse_args('')
