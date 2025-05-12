@@ -111,6 +111,10 @@ DANN consists of:
 
 <hr/>
 
+<h2> Views </h2>
+
+![](http://profile-counter.glitch.me/97yong-domain-adaptation-signal/count.svg)
+
 <h2>📚 Reference</h2>
 
 <p>
